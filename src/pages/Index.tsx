@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Heart, Sparkles } from "lucide-react";
+import { Heart, Sparkles, Star } from "lucide-react";
 import FloatingHearts from "@/components/FloatingHearts";
 import LockSeal from "@/components/LockSeal";
 import GiftBox from "@/components/GiftBox";
@@ -30,7 +30,6 @@ const Index = () => {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [hasOpenedGift, setHasOpenedGift] = useState(false);
 
-  // Load unlocked keys from localStorage
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
@@ -45,7 +44,6 @@ const Index = () => {
     }
   }, []);
 
-  // Save unlocked keys to localStorage
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(unlockedKeys));
   }, [unlockedKeys]);
@@ -67,24 +65,36 @@ const Index = () => {
     <div className="min-h-screen bg-blush-gradient relative overflow-x-hidden">
       <FloatingHearts />
 
+      {/* Decorative top fade */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-romantic-soft/30 to-transparent pointer-events-none" />
+
       <div className="relative z-10 min-h-screen flex flex-col px-4 py-8 max-w-md mx-auto">
         {/* Header */}
-        <header className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <Sparkles className="w-5 h-5 text-romantic-gold" />
-            <Heart className="w-8 h-8 text-primary fill-primary animate-heart-beat" />
-            <Sparkles className="w-5 h-5 text-romantic-gold" />
+        <header className="text-center mb-10 pt-4">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Star className="w-5 h-5 text-romantic-gold animate-twinkle" />
+            <Sparkles className="w-6 h-6 text-romantic-gold animate-sparkle" />
+            <Heart className="w-10 h-10 text-primary fill-primary animate-heart-beat drop-shadow-lg animate-glow-pulse" />
+            <Sparkles className="w-6 h-6 text-romantic-gold animate-sparkle" style={{ animationDelay: '0.5s' }} />
+            <Star className="w-5 h-5 text-romantic-gold animate-twinkle" style={{ animationDelay: '1s' }} />
           </div>
-          <h1 className="font-display text-3xl font-bold text-romantic-deep mb-2">
+          <h1 className="font-display text-4xl font-bold mb-3 animate-text-shimmer">
             Um Presente Especial
           </h1>
-          <p className="font-body text-muted-foreground">
-            Para você, com todo meu amor 💕
+          <p className="font-body text-lg text-muted-foreground tracking-wide">
+            Para você, com todo meu amor
           </p>
+          <div className="flex justify-center gap-1 mt-2">
+            <Heart className="w-4 h-4 text-primary fill-primary opacity-60" />
+            <Heart className="w-4 h-4 text-primary fill-primary opacity-80" />
+            <Heart className="w-4 h-4 text-primary fill-primary" />
+            <Heart className="w-4 h-4 text-primary fill-primary opacity-80" />
+            <Heart className="w-4 h-4 text-primary fill-primary opacity-60" />
+          </div>
         </header>
 
         {/* Gift Box */}
-        <section className="mb-8">
+        <section className="mb-10">
           <GiftBox
             unlockedCount={unlockedKeys.length}
             totalLocks={locks.length}
@@ -93,39 +103,53 @@ const Index = () => {
           />
         </section>
 
+        {/* Divider */}
+        <div className="flex items-center gap-4 mb-8">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-romantic-mauve to-transparent" />
+          <Heart className="w-5 h-5 text-romantic-mauve" />
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-romantic-mauve to-transparent" />
+        </div>
+
         {/* Locks Section */}
-        <section className="flex-1 space-y-4">
-          <h2 className="font-display text-xl text-center text-foreground mb-4">
+        <section className="flex-1 space-y-5">
+          <h2 className="font-display text-2xl text-center text-foreground mb-6">
             {allUnlocked ? (
-              <span className="text-romantic-gold">
+              <span className="animate-text-shimmer inline-block">
                 ✨ Todas as chaves desbloqueadas! ✨
               </span>
             ) : (
-              "Desbloqueie as chaves do meu coração"
+              <span className="text-romantic-deep">
+                Desbloqueie as chaves do meu coração
+              </span>
             )}
           </h2>
 
-          <div className="space-y-4">
-            {locks.map((lock) => (
-              <LockSeal
+          <div className="space-y-5">
+            {locks.map((lock, index) => (
+              <div
                 key={lock.id}
-                lockNumber={lock.id}
-                hint={lock.hint}
-                correctPassword={lock.password}
-                isUnlocked={unlockedKeys.includes(lock.id)}
-                onUnlock={() => handleUnlock(lock.id)}
-              />
+                className="animate-fade-up"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <LockSeal
+                  lockNumber={lock.id}
+                  hint={lock.hint}
+                  correctPassword={lock.password}
+                  isUnlocked={unlockedKeys.includes(lock.id)}
+                  onUnlock={() => handleUnlock(lock.id)}
+                />
+              </div>
             ))}
           </div>
         </section>
 
         {/* Footer */}
-        <footer className="mt-8 text-center">
-          <p className="text-sm text-muted-foreground font-body">
-            Feito com{" "}
-            <Heart className="inline w-4 h-4 text-primary fill-primary" /> para
-            você
-          </p>
+        <footer className="mt-12 text-center pb-4">
+          <div className="flex items-center justify-center gap-2 text-muted-foreground">
+            <span className="font-body text-sm tracking-wide">Feito com</span>
+            <Heart className="w-4 h-4 text-primary fill-primary animate-heart-beat" />
+            <span className="font-body text-sm tracking-wide">para você</span>
+          </div>
         </footer>
       </div>
 
