@@ -2,83 +2,95 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Quicksand:wght@300;400;500;600&display=swap');
 
 @layer base {
   :root {
-    --background: 350 30% 98%;
-    --foreground: 350 50% 15%;
+    --background: 340 35% 97%;
+    --foreground: 340 30% 15%;
 
-    --card: 350 40% 97%;
-    --card-foreground: 350 50% 15%;
+    --card: 340 40% 98%;
+    --card-foreground: 340 30% 15%;
 
-    --popover: 350 40% 97%;
-    --popover-foreground: 350 50% 15%;
+    --popover: 340 40% 98%;
+    --popover-foreground: 340 30% 15%;
 
-    --primary: 350 80% 60%;
+    --primary: 340 65% 55%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 35 70% 85%;
-    --secondary-foreground: 350 50% 20%;
+    --secondary: 25 60% 92%;
+    --secondary-foreground: 340 40% 25%;
 
-    --muted: 350 20% 92%;
-    --muted-foreground: 350 20% 45%;
+    --muted: 340 25% 93%;
+    --muted-foreground: 340 15% 45%;
 
-    --accent: 35 80% 65%;
-    --accent-foreground: 35 90% 15%;
+    --accent: 25 75% 60%;
+    --accent-foreground: 25 90% 15%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 350 30% 88%;
-    --input: 350 30% 88%;
-    --ring: 350 80% 60%;
+    --border: 340 30% 88%;
+    --input: 340 30% 90%;
+    --ring: 340 65% 55%;
 
-    --radius: 1rem;
+    --radius: 1.25rem;
 
-    --romantic-rose: 350 80% 65%;
-    --romantic-blush: 350 50% 90%;
-    --romantic-gold: 35 85% 55%;
-    --romantic-cream: 35 40% 95%;
-    --romantic-deep: 350 70% 35%;
+    /* Romantic palette - softer, more elegant pinks */
+    --romantic-rose: 340 55% 60%;
+    --romantic-blush: 340 45% 94%;
+    --romantic-peach: 15 70% 85%;
+    --romantic-gold: 35 80% 58%;
+    --romantic-cream: 30 50% 96%;
+    --romantic-deep: 340 50% 30%;
+    --romantic-mauve: 340 30% 75%;
+    --romantic-soft: 340 60% 85%;
 
-    --font-display: 'Playfair Display', serif;
-    --font-body: 'Lora', serif;
+    /* Typography */
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Quicksand', sans-serif;
 
-    --gradient-romantic: linear-gradient(135deg, hsl(350 80% 65%), hsl(350 60% 55%));
-    --gradient-gold: linear-gradient(135deg, hsl(35 85% 55%), hsl(35 70% 45%));
-    --gradient-blush: linear-gradient(180deg, hsl(350 50% 95%), hsl(350 40% 90%));
+    /* Gradients */
+    --gradient-romantic: linear-gradient(135deg, hsl(340 55% 60%), hsl(340 45% 50%));
+    --gradient-soft: linear-gradient(135deg, hsl(340 60% 85%), hsl(340 55% 75%));
+    --gradient-gold: linear-gradient(135deg, hsl(35 80% 58%), hsl(25 70% 50%));
+    --gradient-blush: linear-gradient(180deg, hsl(340 45% 97%), hsl(340 40% 92%));
+    --gradient-peach: linear-gradient(135deg, hsl(15 70% 85%), hsl(340 50% 80%));
+    --gradient-shimmer: linear-gradient(110deg, transparent 25%, hsl(0 0% 100% / 0.3) 50%, transparent 75%);
 
-    --shadow-romantic: 0 10px 40px -10px hsl(350 80% 60% / 0.3);
-    --shadow-gold: 0 5px 20px -5px hsl(35 85% 55% / 0.4);
-    --shadow-soft: 0 4px 20px hsl(350 50% 50% / 0.1);
+    /* Shadows */
+    --shadow-romantic: 0 10px 40px -10px hsl(340 55% 60% / 0.35);
+    --shadow-gold: 0 8px 25px -5px hsl(35 80% 58% / 0.4);
+    --shadow-soft: 0 4px 20px hsl(340 50% 50% / 0.12);
+    --shadow-glow: 0 0 30px hsl(340 55% 60% / 0.25);
+    --shadow-inner: inset 0 2px 8px hsl(340 40% 50% / 0.1);
   }
 
   .dark {
-    --background: 350 30% 8%;
-    --foreground: 350 20% 95%;
+    --background: 340 25% 8%;
+    --foreground: 340 20% 95%;
 
-    --card: 350 25% 12%;
-    --card-foreground: 350 20% 95%;
+    --card: 340 20% 12%;
+    --card-foreground: 340 20% 95%;
 
-    --popover: 350 25% 12%;
-    --popover-foreground: 350 20% 95%;
+    --popover: 340 20% 12%;
+    --popover-foreground: 340 20% 95%;
 
-    --primary: 350 75% 55%;
+    --primary: 340 60% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 35 50% 25%;
-    --secondary-foreground: 35 30% 90%;
+    --secondary: 25 40% 20%;
+    --secondary-foreground: 25 30% 90%;
 
-    --muted: 350 20% 18%;
-    --muted-foreground: 350 15% 65%;
+    --muted: 340 15% 18%;
+    --muted-foreground: 340 12% 65%;
 
-    --accent: 35 70% 45%;
-    --accent-foreground: 35 90% 95%;
+    --accent: 25 60% 45%;
+    --accent-foreground: 25 90% 95%;
 
-    --border: 350 20% 20%;
-    --input: 350 20% 20%;
-    --ring: 350 75% 55%;
+    --border: 340 15% 20%;
+    --input: 340 15% 20%;
+    --ring: 340 60% 60%;
   }
 }
 
@@ -94,6 +106,8 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.02em;
   }
 }
 
@@ -109,12 +123,20 @@
     background: var(--gradient-romantic);
   }
 
+  .bg-soft-gradient {
+    background: var(--gradient-soft);
+  }
+
   .bg-gold-gradient {
     background: var(--gradient-gold);
   }
 
   .bg-blush-gradient {
     background: var(--gradient-blush);
+  }
+
+  .bg-peach-gradient {
+    background: var(--gradient-peach);
   }
 
   .shadow-romantic {
@@ -128,34 +150,58 @@
   .shadow-soft {
     box-shadow: var(--shadow-soft);
   }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .glass-effect {
+    background: hsl(340 45% 98% / 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-shimmer);
+    animation: shimmer 3s ease-in-out infinite;
+  }
 }
 
+/* Keyframe Animations */
 @keyframes float-heart {
   0%, 100% {
-    transform: translateY(0) rotate(-5deg);
+    transform: translateY(0) rotate(-5deg) scale(1);
   }
   50% {
-    transform: translateY(-10px) rotate(5deg);
+    transform: translateY(-15px) rotate(5deg) scale(1.1);
   }
 }
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px hsl(350 80% 60% / 0.3);
+    box-shadow: 0 0 20px hsl(340 55% 60% / 0.3), 0 0 40px hsl(340 55% 60% / 0.1);
   }
   50% {
-    box-shadow: 0 0 40px hsl(350 80% 60% / 0.5);
+    box-shadow: 0 0 35px hsl(340 55% 60% / 0.5), 0 0 60px hsl(340 55% 60% / 0.2);
   }
 }
 
 @keyframes sparkle {
   0%, 100% {
     opacity: 0;
-    transform: scale(0);
+    transform: scale(0) rotate(0deg);
   }
   50% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) rotate(180deg);
   }
 }
 
@@ -167,6 +213,80 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes gentle-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scale-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px hsl(340 55% 60% / 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px hsl(340 55% 60% / 0.7));
+  }
+}
+
+@keyframes text-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes border-dance {
+  0%, 100% {
+    border-color: hsl(340 55% 60% / 0.3);
+  }
+  50% {
+    border-color: hsl(340 55% 60% / 0.6);
+  }
+}
+
+@keyframes petal-fall {
+  0% {
+    transform: translateY(-10%) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
   }
 }
 
@@ -184,4 +304,116 @@
 
 .animate-fade-up {
   animation: fade-up 0.6s ease-out forwards;
+}
+
+.animate-gentle-bounce {
+  animation: gentle-bounce 2s ease-in-out infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
+.animate-scale-pulse {
+  animation: scale-pulse 2s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.animate-text-shimmer {
+  background: linear-gradient(
+    110deg,
+    hsl(340 50% 30%) 0%,
+    hsl(340 55% 60%) 45%,
+    hsl(35 80% 58%) 50%,
+    hsl(340 55% 60%) 55%,
+    hsl(340 50% 30%) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: text-shimmer 4s linear infinite;
+}
+
+.animate-border-dance {
+  animation: border-dance 2s ease-in-out infinite;
+}
+
+.animate-petal-fall {
+  animation: petal-fall 10s linear infinite;
+}
+
+/* Button styles */
+.btn-romantic {
+  @apply relative overflow-hidden transition-all duration-300;
+  background: var(--gradient-romantic);
+  box-shadow: var(--shadow-romantic);
+}
+
+.btn-romantic:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 45px -10px hsl(340 55% 60% / 0.45);
+}
+
+.btn-romantic:active {
+  transform: translateY(0);
+}
+
+.btn-romantic::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, hsl(0 0% 100% / 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.btn-romantic:hover::before {
+  opacity: 1;
+}
+
+.btn-soft {
+  @apply relative overflow-hidden transition-all duration-300;
+  background: var(--gradient-soft);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-soft:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-gold {
+  @apply relative overflow-hidden transition-all duration-300;
+  background: var(--gradient-gold);
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+/* Card styles */
+.card-romantic {
+  @apply rounded-2xl transition-all duration-300;
+  background: hsl(340 45% 98% / 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid hsl(340 40% 90%);
+  box-shadow: var(--shadow-soft);
+}
+
+.card-romantic:hover {
+  box-shadow: var(--shadow-romantic);
+  border-color: hsl(340 55% 80%);
+}
+
+/* Decorative elements */
+.decorative-ring {
+  @apply absolute rounded-full border-2 opacity-20;
+  border-color: hsl(340 55% 60%);
+  animation: scale-pulse 4s ease-in-out infinite;
 }
