@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Lock, Unlock, Heart } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 interface LockSealProps {
   lockNumber: number;
@@ -27,7 +28,7 @@ const LockSeal = ({
       setShowSuccess(true);
       setTimeout(() => {
         onUnlock();
-      }, 700);
+      }, 600);
     } else {
       setIsShaking(true);
       setTimeout(() => setIsShaking(false), 500);
@@ -36,18 +37,18 @@ const LockSeal = ({
 
   if (isUnlocked) {
     return (
-      <div className="p-5 rounded-2xl bg-romantic-light border-2 border-primary/30 shadow-romantic animate-fade-up">
-        <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-full btn-romantic flex items-center justify-center animate-unlock">
-            <Unlock className="w-6 h-6 text-primary-foreground" />
+      <div className="relative p-6 rounded-2xl bg-romantic-blush/50 border-2 border-romantic-gold/30 shadow-gold transition-all duration-500">
+        <div className="flex items-center gap-3">
+          <div className="w-14 h-14 rounded-full bg-gold-gradient flex items-center justify-center shadow-gold animate-unlock">
+            <Unlock className="w-7 h-7 text-primary-foreground" />
           </div>
           <div>
-            <p className="font-display text-2xl text-romantic-deep">
+            <p className="font-display text-lg text-romantic-deep">
               Chave {lockNumber}
             </p>
-            <p className="text-sm text-muted-foreground font-body flex items-center gap-1">
+            <p className="text-sm text-muted-foreground flex items-center gap-1">
               <Heart className="w-4 h-4 fill-primary text-primary" />
-              Desbloqueada!
+              Desbloqueada
             </p>
           </div>
         </div>
@@ -57,41 +58,49 @@ const LockSeal = ({
 
   return (
     <div
-      className={`p-5 rounded-2xl card-romantic ${
+      className={`relative p-6 rounded-2xl bg-card border-2 border-border shadow-soft transition-all duration-300 ${
         isShaking ? "animate-shake" : ""
-      } ${showSuccess ? "border-primary/40 shadow-romantic" : ""}`}
+      } ${showSuccess ? "animate-unlock border-romantic-gold" : ""}`}
     >
-      <div className="flex items-center gap-4 mb-4">
-        <div className="w-14 h-14 rounded-full btn-romantic flex items-center justify-center animate-pulse-glow">
-          <Lock className="w-6 h-6 text-primary-foreground" />
+      <style>{`
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          20%, 60% { transform: translateX(-8px); }
+          40%, 80% { transform: translateX(8px); }
+        }
+        .animate-shake {
+          animation: shake 0.5s ease-in-out;
+        }
+      `}</style>
+
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-14 h-14 rounded-full bg-romantic-gradient flex items-center justify-center shadow-romantic animate-pulse-glow">
+          <Lock className="w-7 h-7 text-primary-foreground" />
         </div>
         <div>
-          <p className="font-display text-2xl text-foreground">Chave {lockNumber}</p>
-          <p className="text-sm text-muted-foreground font-body">Descubra a senha</p>
+          <p className="font-display text-lg text-foreground">Chave {lockNumber}</p>
+          <p className="text-sm text-muted-foreground">Descubra a senha</p>
         </div>
       </div>
 
-      <div className="bg-romantic-blush rounded-xl p-3 mb-4 border border-romantic-soft">
-        <p className="text-sm text-romantic-deep font-body">
-          💝 <span className="italic">Dica:</span> {hint}
-        </p>
-      </div>
+      <p className="text-sm italic text-muted-foreground mb-4 pl-1">
+        💝 Dica: {hint}
+      </p>
 
-      <form onSubmit={handleSubmit} className="flex gap-3">
+      <form onSubmit={handleSubmit} className="flex gap-2">
         <Input
           type="text"
           placeholder="Digite a senha..."
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="flex-1 h-12 bg-white border-romantic-soft focus:border-primary focus:ring-primary/20 rounded-xl font-body"
+          className="flex-1 bg-background border-border focus:border-primary focus:ring-primary"
         />
-        <button
+        <Button
           type="submit"
-          className="h-12 px-5 rounded-xl btn-romantic text-primary-foreground flex items-center gap-2 font-body font-semibold"
+          className="bg-romantic-gradient hover:opacity-90 text-primary-foreground shadow-romantic"
         >
           <Heart className="w-4 h-4" />
-          Abrir
-        </button>
+        </Button>
       </form>
     </div>
   );

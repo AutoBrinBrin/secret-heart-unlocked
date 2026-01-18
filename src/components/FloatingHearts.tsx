@@ -13,12 +13,12 @@ const FloatingHearts = () => {
   const [hearts, setHearts] = useState<FloatingHeart[]>([]);
 
   useEffect(() => {
-    const newHearts: FloatingHeart[] = Array.from({ length: 20 }, (_, i) => ({
+    const newHearts: FloatingHeart[] = Array.from({ length: 15 }, (_, i) => ({
       id: i,
       left: Math.random() * 100,
-      delay: Math.random() * 6,
-      duration: 12 + Math.random() * 6,
-      size: 12 + Math.random() * 14,
+      delay: Math.random() * 5,
+      duration: 8 + Math.random() * 4,
+      size: 12 + Math.random() * 16,
     }));
     setHearts(newHearts);
   }, []);
@@ -28,7 +28,7 @@ const FloatingHearts = () => {
       {hearts.map((heart) => (
         <div
           key={heart.id}
-          className="absolute"
+          className="absolute opacity-20"
           style={{
             left: `${heart.left}%`,
             bottom: "-50px",
@@ -36,12 +36,11 @@ const FloatingHearts = () => {
           }}
         >
           <Heart
-            className="text-primary fill-primary opacity-20"
+            className="text-primary fill-primary"
             style={{ width: heart.size, height: heart.size }}
           />
         </div>
       ))}
-      
       <style>{`
         @keyframes floatUp {
           0% {
@@ -49,13 +48,13 @@ const FloatingHearts = () => {
             opacity: 0;
           }
           10% {
-            opacity: 0.25;
+            opacity: 0.3;
           }
           90% {
-            opacity: 0.15;
+            opacity: 0.2;
           }
           100% {
-            transform: translateY(-105vh) rotate(360deg);
+            transform: translateY(-100vh) rotate(360deg);
             opacity: 0;
           }
         }

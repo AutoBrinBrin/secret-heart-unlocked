@@ -28,7 +28,9 @@ const locks = [
 const Index = () => {
   const [unlockedKeys, setUnlockedKeys] = useState<number[]>([]);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [hasOpenedGift, setHasOpenedGift] = useState(false);
 
+  // Load unlocked keys from localStorage
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
@@ -38,11 +40,12 @@ const Index = () => {
           setUnlockedKeys(parsed);
         }
       } catch {
-        // Invalid data
+        // Invalid data, start fresh
       }
     }
   }, []);
 
+  // Save unlocked keys to localStorage
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(unlockedKeys));
   }, [unlockedKeys]);
@@ -54,29 +57,28 @@ const Index = () => {
   };
 
   const handleOpenGift = () => {
+    setHasOpenedGift(true);
     setIsGalleryOpen(true);
   };
 
   const allUnlocked = unlockedKeys.length === locks.length;
 
   return (
-    <div className="min-h-screen bg-blush-gradient relative overflow-hidden">
+    <div className="min-h-screen bg-blush-gradient relative overflow-x-hidden">
       <FloatingHearts />
 
-      <div className="relative z-10 min-h-screen flex flex-col px-5 py-8 max-w-md mx-auto">
+      <div className="relative z-10 min-h-screen flex flex-col px-4 py-8 max-w-md mx-auto">
         {/* Header */}
         <header className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <Sparkles className="w-5 h-5 text-primary animate-twinkle" />
-            <Heart className="w-10 h-10 text-primary fill-primary animate-heart-beat" />
-            <Sparkles className="w-5 h-5 text-primary animate-twinkle" style={{ animationDelay: '0.5s' }} />
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <Sparkles className="w-5 h-5 text-romantic-gold" />
+            <Heart className="w-8 h-8 text-primary fill-primary animate-heart-beat" />
+            <Sparkles className="w-5 h-5 text-romantic-gold" />
           </div>
-          
-          <h1 className="font-display text-5xl text-romantic-deep mb-2">
+          <h1 className="font-display text-3xl font-bold text-romantic-deep mb-2">
             Um Presente Especial
           </h1>
-          
-          <p className="font-body text-muted-foreground text-lg">
+          <p className="font-body text-muted-foreground">
             Para você, com todo meu amor 💕
           </p>
         </header>
@@ -91,20 +93,16 @@ const Index = () => {
           />
         </section>
 
-        {/* Divider */}
-        <div className="flex items-center gap-4 mb-6">
-          <div className="flex-1 h-px bg-romantic-soft" />
-          <Heart className="w-4 h-4 text-romantic-medium fill-romantic-medium" />
-          <div className="flex-1 h-px bg-romantic-soft" />
-        </div>
-
         {/* Locks Section */}
-        <section className="flex-1">
-          <h2 className="font-display text-3xl text-center text-romantic-deep mb-6">
-            {allUnlocked 
-              ? "✨ Todas desbloqueadas! ✨"
-              : "Desbloqueie as chaves"
-            }
+        <section className="flex-1 space-y-4">
+          <h2 className="font-display text-xl text-center text-foreground mb-4">
+            {allUnlocked ? (
+              <span className="text-romantic-gold">
+                ✨ Todas as chaves desbloqueadas! ✨
+              </span>
+            ) : (
+              "Desbloqueie as chaves do meu coração"
+            )}
           </h2>
 
           <div className="space-y-4">
@@ -122,13 +120,16 @@ const Index = () => {
         </section>
 
         {/* Footer */}
-        <footer className="mt-10 text-center">
-          <p className="font-body text-sm text-muted-foreground flex items-center justify-center gap-1">
-            Feito com <Heart className="w-4 h-4 text-primary fill-primary" /> para você
+        <footer className="mt-8 text-center">
+          <p className="text-sm text-muted-foreground font-body">
+            Feito com{" "}
+            <Heart className="inline w-4 h-4 text-primary fill-primary" /> para
+            você
           </p>
         </footer>
       </div>
 
+      {/* Image Gallery Modal */}
       <ImageGallery
         isOpen={isGalleryOpen}
         onClose={() => setIsGalleryOpen(false)}

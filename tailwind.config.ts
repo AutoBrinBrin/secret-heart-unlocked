@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Dancing Script', 'cursive'],
-        body: ['Nunito', 'sans-serif'],
+        display: ['Playfair Display', 'serif'],
+        body: ['Lora', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -54,10 +54,9 @@ export default {
         romantic: {
           rose: "hsl(var(--romantic-rose))",
           blush: "hsl(var(--romantic-blush))",
-          light: "hsl(var(--romantic-light))",
-          medium: "hsl(var(--romantic-medium))",
+          gold: "hsl(var(--romantic-gold))",
+          cream: "hsl(var(--romantic-cream))",
           deep: "hsl(var(--romantic-deep))",
-          soft: "hsl(var(--romantic-soft))",
         },
       },
       borderRadius: {
@@ -74,10 +73,35 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "unlock": {
+          "0%": { transform: "scale(1) rotate(0deg)" },
+          "25%": { transform: "scale(1.1) rotate(-5deg)" },
+          "50%": { transform: "scale(1.2) rotate(5deg)" },
+          "75%": { transform: "scale(1.1) rotate(-3deg)" },
+          "100%": { transform: "scale(1) rotate(0deg)" },
+        },
+        "reveal": {
+          "0%": { opacity: "0", transform: "scale(0.8) translateY(20px)" },
+          "100%": { opacity: "1", transform: "scale(1) translateY(0)" },
+        },
+        "heart-beat": {
+          "0%, 100%": { transform: "scale(1)" },
+          "25%": { transform: "scale(1.1)" },
+          "50%": { transform: "scale(1)" },
+          "75%": { transform: "scale(1.05)" },
+        },
+        "slide-image": {
+          "0%": { opacity: "0", transform: "translateX(100%)" },
+          "100%": { opacity: "1", transform: "translateX(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "unlock": "unlock 0.6s ease-out",
+        "reveal": "reveal 0.8s ease-out forwards",
+        "heart-beat": "heart-beat 1.5s ease-in-out infinite",
+        "slide-image": "slide-image 0.6s ease-out forwards",
       },
     },
   },

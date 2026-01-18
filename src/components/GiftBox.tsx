@@ -1,4 +1,4 @@
-import { Gift, Sparkles, Heart } from "lucide-react";
+import { Gift, Sparkles } from "lucide-react";
 
 interface GiftBoxProps {
   unlockedCount: number;
@@ -9,16 +9,16 @@ interface GiftBoxProps {
 
 const GiftBox = ({ unlockedCount, totalLocks, isReady, onOpen }: GiftBoxProps) => {
   return (
-    <div className="flex flex-col items-center py-4">
+    <div className="relative flex flex-col items-center">
       {/* Progress indicator */}
-      <div className="flex items-center gap-3 mb-6">
+      <div className="flex gap-2 mb-6">
         {Array.from({ length: totalLocks }).map((_, i) => (
           <div
             key={i}
             className={`w-3 h-3 rounded-full transition-all duration-500 ${
               i < unlockedCount
-                ? "bg-primary shadow-glow scale-110"
-                : "bg-romantic-soft border border-romantic-medium"
+                ? "bg-romantic-gold shadow-gold scale-110"
+                : "bg-muted"
             }`}
           />
         ))}
@@ -28,52 +28,48 @@ const GiftBox = ({ unlockedCount, totalLocks, isReady, onOpen }: GiftBoxProps) =
       <button
         onClick={isReady ? onOpen : undefined}
         disabled={!isReady}
-        className={`relative transition-all duration-500 ${
+        className={`relative group transition-all duration-500 ${
           isReady ? "cursor-pointer" : "cursor-not-allowed"
         }`}
       >
         <div
           className={`w-32 h-32 rounded-2xl flex items-center justify-center transition-all duration-500 ${
             isReady
-              ? "btn-romantic animate-heart-beat"
-              : "bg-romantic-light border-2 border-romantic-soft"
+              ? "bg-gold-gradient shadow-gold animate-heart-beat"
+              : "bg-muted"
           }`}
         >
           <Gift
-            className={`w-14 h-14 transition-colors duration-500 ${
-              isReady ? "text-primary-foreground" : "text-romantic-medium"
+            className={`w-16 h-16 transition-all duration-500 ${
+              isReady ? "text-primary-foreground" : "text-muted-foreground"
             }`}
           />
-          
           {isReady && (
             <>
-              <Sparkles className="absolute top-1 right-1 w-5 h-5 text-primary-foreground/80 animate-sparkle" />
+              <Sparkles className="absolute top-0 right-0 w-6 h-6 text-romantic-gold animate-sparkle" />
               <Sparkles
-                className="absolute bottom-2 left-2 w-4 h-4 text-primary-foreground/60 animate-sparkle"
+                className="absolute bottom-0 left-0 w-5 h-5 text-primary animate-sparkle"
                 style={{ animationDelay: "0.5s" }}
+              />
+              <Sparkles
+                className="absolute top-1/2 left-0 w-4 h-4 text-romantic-gold animate-sparkle"
+                style={{ animationDelay: "1s" }}
               />
             </>
           )}
         </div>
 
         {isReady && (
-          <div className="mt-5 text-center animate-gentle-bounce">
-            <p className="font-display text-2xl text-romantic-deep flex items-center justify-center gap-2">
-              <Heart className="w-5 h-5 text-primary fill-primary" />
-              Toque para abrir!
-              <Heart className="w-5 h-5 text-primary fill-primary" />
-            </p>
-          </div>
+          <p className="mt-4 text-center font-display text-lg text-romantic-deep animate-pulse">
+            Toque para abrir! 💝
+          </p>
         )}
       </button>
 
       {!isReady && (
-        <p className="mt-5 text-center text-muted-foreground text-sm font-body">
-          Desbloqueie mais{" "}
-          <span className="font-bold text-primary">
-            {totalLocks - unlockedCount}
-          </span>{" "}
-          chave{totalLocks - unlockedCount > 1 ? "s" : ""} para abrir
+        <p className="mt-4 text-center text-muted-foreground text-sm">
+          Desbloqueie {totalLocks - unlockedCount} chave
+          {totalLocks - unlockedCount > 1 ? "s" : ""} para abrir
         </p>
       )}
     </div>

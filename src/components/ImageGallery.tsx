@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Heart, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 import romantic1 from "@/assets/romantic-1.jpg";
 import romantic2 from "@/assets/romantic-2.jpg";
@@ -29,7 +30,7 @@ const ImageGallery = ({ isOpen, onClose }: ImageGalleryProps) => {
     if (isOpen) {
       setCurrentIndex(0);
       setShowImage(false);
-      setTimeout(() => setShowImage(true), 150);
+      setTimeout(() => setShowImage(true), 100);
     }
   }, [isOpen]);
 
@@ -41,7 +42,7 @@ const ImageGallery = ({ isOpen, onClose }: ImageGalleryProps) => {
         setCurrentIndex((prev) => prev + 1);
         setShowImage(true);
         setIsAnimating(false);
-      }, 350);
+      }, 300);
     }
   };
 
@@ -53,132 +54,107 @@ const ImageGallery = ({ isOpen, onClose }: ImageGalleryProps) => {
         setCurrentIndex((prev) => prev - 1);
         setShowImage(true);
         setIsAnimating(false);
-      }, 350);
+      }, 300);
     }
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-romantic-deep/95 backdrop-blur-sm">
-      {/* Floating hearts background */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {Array.from({ length: 15 }).map((_, i) => (
-          <Heart
-            key={i}
-            className="absolute text-primary/15 fill-primary/10"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              width: 15 + Math.random() * 20,
-              height: 15 + Math.random() * 20,
-              animation: `floatUp ${15 + Math.random() * 10}s ease-in-out ${Math.random() * 5}s infinite`,
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="relative w-full h-full flex flex-col items-center justify-center p-4 z-10">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/90 backdrop-blur-sm">
+      <div className="relative w-full h-full flex flex-col items-center justify-center p-4">
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 w-11 h-11 rounded-full bg-white/10 backdrop-blur flex items-center justify-center text-white hover:bg-white/20 transition-colors border border-white/20"
+          className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-background/20 flex items-center justify-center text-primary-foreground hover:bg-background/30 transition-colors"
         >
-          <X className="w-5 h-5" />
+          <X className="w-6 h-6" />
         </button>
 
-        {/* Title */}
-        <h2 className="font-display text-3xl text-white mb-4">
-          ✨ Nosso Amor ✨
-        </h2>
-
         {/* Progress dots */}
-        <div className="flex gap-2 mb-5">
+        <div className="flex gap-2 mb-6">
           {images.map((_, i) => (
             <div
               key={i}
-              className={`h-2 rounded-full transition-all duration-400 ${
-                i === currentIndex 
-                  ? "bg-primary w-7" 
-                  : i < currentIndex 
-                    ? "bg-primary/50 w-2" 
-                    : "bg-white/30 w-2"
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                i === currentIndex ? "bg-primary w-6" : "bg-primary/30"
               }`}
             />
           ))}
         </div>
 
         {/* Image container */}
-        <div className="relative w-full max-w-sm aspect-[3/4] overflow-hidden rounded-3xl shadow-romantic border-2 border-primary/30">
+        <div className="relative w-full max-w-sm aspect-[3/4] overflow-hidden rounded-2xl shadow-romantic">
           <img
             src={images[currentIndex].src}
             alt={`Imagem romântica ${currentIndex + 1}`}
             className={`w-full h-full object-cover transition-all duration-500 ${
               showImage
-                ? "opacity-100 scale-100"
-                : "opacity-0 scale-105"
+                ? "opacity-100 scale-100 translate-x-0"
+                : "opacity-0 scale-95 translate-x-8"
             }`}
           />
 
           {/* Overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-romantic-deep/70 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent" />
 
           {/* Message */}
           <div
-            className={`absolute bottom-0 left-0 right-0 p-5 text-center transition-all duration-600 ${
+            className={`absolute bottom-0 left-0 right-0 p-6 transition-all duration-700 delay-200 ${
               showImage ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
-            style={{ transitionDelay: showImage ? "200ms" : "0ms" }}
           >
-            <p className="text-white font-display text-2xl leading-relaxed drop-shadow-lg">
+            <p className="text-primary-foreground font-display text-xl text-center">
               {images[currentIndex].message}
             </p>
           </div>
 
-          {/* Decorative hearts */}
-          <Heart
-            className="absolute top-4 left-4 w-6 h-6 text-primary fill-primary drop-shadow animate-float-heart"
-          />
-          <Heart
-            className="absolute top-6 right-5 w-4 h-4 text-romantic-soft fill-romantic-soft drop-shadow animate-float-heart"
-            style={{ animationDelay: "0.5s" }}
-          />
+          {/* Floating hearts */}
+          <div className="absolute top-4 left-4">
+            <Heart
+              className="w-6 h-6 text-primary fill-primary animate-float-heart"
+              style={{ animationDelay: "0s" }}
+            />
+          </div>
+          <div className="absolute top-8 right-6">
+            <Heart
+              className="w-4 h-4 text-primary fill-primary animate-float-heart"
+              style={{ animationDelay: "0.5s" }}
+            />
+          </div>
         </div>
 
         {/* Navigation */}
-        <div className="flex items-center gap-6 mt-6">
-          <button
+        <div className="flex items-center gap-4 mt-6">
+          <Button
+            variant="outline"
+            size="icon"
             onClick={goToPrev}
             disabled={currentIndex === 0 || isAnimating}
-            className="w-12 h-12 rounded-full btn-soft flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed"
+            className="rounded-full bg-background/20 border-primary/30 text-primary-foreground hover:bg-background/30 disabled:opacity-30"
           >
-            <ChevronLeft className="w-5 h-5 text-romantic-deep" />
-          </button>
+            <ChevronLeft className="w-5 h-5" />
+          </Button>
 
-          <span className="text-white font-body text-base">
-            {currentIndex + 1} de {images.length}
+          <span className="text-primary-foreground font-body text-sm">
+            {currentIndex + 1} / {images.length}
           </span>
 
-          <button
+          <Button
+            variant="outline"
+            size="icon"
             onClick={goToNext}
             disabled={currentIndex === images.length - 1 || isAnimating}
-            className="w-12 h-12 rounded-full btn-soft flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed"
+            className="rounded-full bg-background/20 border-primary/30 text-primary-foreground hover:bg-background/30 disabled:opacity-30"
           >
-            <ChevronRight className="w-5 h-5 text-romantic-deep" />
-          </button>
+            <ChevronRight className="w-5 h-5" />
+          </Button>
         </div>
 
         {currentIndex === images.length - 1 && (
-          <div className="mt-6 text-center animate-fade-up">
-            <p className="text-white/90 font-display text-xl mb-3">
-              Te amo para sempre!
-            </p>
-            <div className="flex justify-center gap-2">
-              <Heart className="w-5 h-5 text-primary fill-primary animate-heart-beat" />
-              <Heart className="w-5 h-5 text-primary fill-primary animate-heart-beat" style={{ animationDelay: '0.15s' }} />
-              <Heart className="w-5 h-5 text-primary fill-primary animate-heart-beat" style={{ animationDelay: '0.3s' }} />
-            </div>
-          </div>
+          <p className="mt-6 text-primary-foreground/80 text-center font-body animate-fade-up">
+            Te amo para sempre! ❤️
+          </p>
         )}
       </div>
     </div>
